@@ -7,9 +7,22 @@ type TypeCard = {
   alt: string;
 };
 
-const cardsStore = writable<TypeCard[]>([]);
+type TypeCardsStore = {
+  notUsed: TypeCard[];
+  used: {
+    [player: number]: TypeCard[];
+    inTable: TypeCard[];
+  };
+};
 
-cardsStore.set(generateDefaultSortedCardsObjects());
+const cardsStore = writable<TypeCardsStore>({
+  notUsed: generateDefaultSortedCardsObjects(),
+  used: {
+    "1": [],
+    "2": [],
+    inTable: [],
+  },
+});
 
 export default cardsStore;
 
