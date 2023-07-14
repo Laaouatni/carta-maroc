@@ -61,6 +61,14 @@
   }
 
   function handleGetAnotherCard(playerNumber: number) {
+    console.log({ notUsed: $cardsStore.notUsed, used: $cardsStore.used  });
+    if($cardsStore.notUsed.length === 1 && $cardsStore.used.inTable.length <= 1) return;
+    if($cardsStore.notUsed.length === 1) {
+      $cardsStore.notUsed = $cardsStore.used.inTable;
+      $cardsStore.notUsed.pop();
+      $cardsStore = $cardsStore;
+      $cardsStore.used.inTable = [$cardsStore.used.inTable.at(-1)!];
+    };
     const removedCard = $cardsStore.notUsed.shift();
     $cardsStore.used[playerNumber].push(removedCard!);
     $cardsStore = $cardsStore;
@@ -71,7 +79,7 @@
   }
 
   $: if ($cardsStore.used[1].length === 0 || $cardsStore.used[2].length === 0) {
-    alert(`win ${$cardsStore.used[1].length === 0 ? 1 : 2}}`);
+    console.log(`win ${$cardsStore.used[1].length === 0 ? 1 : 2}`);
     isPlaying = false;
   }
 
