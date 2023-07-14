@@ -41,7 +41,11 @@
     $cardsStore.used.inTable.push(removedCard);
     $cardsStore = $cardsStore;
 
-    isTurnPlayerNumber = isTurnPlayerNumber === 1 ? 2 : 1;
+    if(Number(removedCard.number) !== 4) isTurnPlayerNumber = isTurnPlayerNumber === 1 ? 2 : 1;
+    if(Number(removedCard.number) === 2) {
+      getFirstCard(isTurnPlayerNumber);
+      getFirstCard(isTurnPlayerNumber);
+    }
 
     return removedCard;
   }
@@ -61,14 +65,18 @@
   }
 
   function handleGetAnotherCard(playerNumber: number) {
-    console.log({ notUsed: $cardsStore.notUsed, used: $cardsStore.used  });
-    if($cardsStore.notUsed.length === 1 && $cardsStore.used.inTable.length <= 1) return;
-    if($cardsStore.notUsed.length === 1) {
+    console.log({ notUsed: $cardsStore.notUsed, used: $cardsStore.used });
+    if (
+      $cardsStore.notUsed.length === 1 &&
+      $cardsStore.used.inTable.length <= 1
+    )
+      return;
+    if ($cardsStore.notUsed.length === 1) {
       $cardsStore.notUsed = $cardsStore.used.inTable;
       $cardsStore.notUsed.pop();
       $cardsStore = $cardsStore;
       $cardsStore.used.inTable = [$cardsStore.used.inTable.at(-1)!];
-    };
+    }
     const removedCard = $cardsStore.notUsed.shift();
     $cardsStore.used[playerNumber].push(removedCard!);
     $cardsStore = $cardsStore;
@@ -78,7 +86,7 @@
     return removedCard;
   }
 
-  $: if ($cardsStore.used[1].length === 0 || $cardsStore.used[2].length === 0) {
+  $: if (isPlaying && ($cardsStore.used[1].length === 0 || $cardsStore.used[2].length === 0)) {
     console.log(`win ${$cardsStore.used[1].length === 0 ? 1 : 2}`);
     isPlaying = false;
   }
