@@ -14,4 +14,5 @@
   style="view-transition-name: {alt};"
   {src}
   {alt}
+  on:click
 />

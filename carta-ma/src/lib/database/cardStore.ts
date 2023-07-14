@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-type TypeCard = {
+export type TypeCard = {
   src: string;
   number: string;
   type: string;
@@ -15,16 +15,22 @@ type TypeCardsStore = {
   };
 };
 
-const cardsStore = writable<TypeCardsStore>({
-  notUsed: generateDefaultSortedCardsObjects(),
-  used: {
-    "1": [],
-    "2": [],
-    inTable: [],
-  },
-});
+const cardsStore = writable<TypeCardsStore>();
+
+resetStore();
 
 export default cardsStore;
+
+export function resetStore() {
+  cardsStore.set({
+    notUsed: generateDefaultSortedCardsObjects(),
+    used: {
+      "1": [],
+      "2": [],
+      inTable: [],
+    },
+  });
+}
 
 function fetchAllCardImageLinks() {
   const importMetaGlobSvgsObj = import.meta.glob("/**/*.svg", { eager: true });
