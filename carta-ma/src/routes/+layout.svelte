@@ -3,4 +3,7 @@
   import "../app.postcss";
 </script>
 
-<slot />
+<div class="bg-slate-200 h-screen overflow-auto">
+  <slot />
+</div>
+
