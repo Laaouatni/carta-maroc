@@ -41,8 +41,9 @@
     $cardsStore.used.inTable.push(removedCard);
     $cardsStore = $cardsStore;
 
-    if(Number(removedCard.number) !== 4) isTurnPlayerNumber = isTurnPlayerNumber === 1 ? 2 : 1;
-    if(Number(removedCard.number) === 2) {
+    if (Number(removedCard.number) !== 4)
+      isTurnPlayerNumber = isTurnPlayerNumber === 1 ? 2 : 1;
+    if (Number(removedCard.number) === 2) {
       getFirstCard(isTurnPlayerNumber);
       getFirstCard(isTurnPlayerNumber);
     }
@@ -86,7 +87,10 @@
     return removedCard;
   }
 
-  $: if (isPlaying && ($cardsStore.used[1].length === 0 || $cardsStore.used[2].length === 0)) {
+  $: if (
+    isPlaying &&
+    ($cardsStore.used[1].length === 0 || $cardsStore.used[2].length === 0)
+  ) {
     console.log(`win ${$cardsStore.used[1].length === 0 ? 1 : 2}`);
     isPlaying = false;
   }
