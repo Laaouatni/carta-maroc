@@ -107,7 +107,7 @@
     <div class="flex flex-col p-4 gap-4 w-screen h-screen justify-between">
       {#each Object.entries($cardsStore.used).filter(([key, value]) => !isNaN(key)) as thisPlayer (thisPlayer)}
         <div
-          class="flex max-h-[20vh] h-min gap-2 p-8 pb-4 pr-4 place-items-center border-4 border-blue-400 relative leading-none bg-white/20 rounded-xl overflow-auto group {isTurnPlayerNumber ===
+          class="flex max-h-[25vh] h-min gap-2 pl-8 p-3 pb-4 pr-4 place-items-center border-4 border-blue-400 relative leading-none bg-white/20 rounded-xl overflow-auto group {isTurnPlayerNumber ===
           Number(thisPlayer[0])
             ? 'border-8 border-blue-800'
             : ''}"
